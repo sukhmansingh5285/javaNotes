@@ -1,0 +1,10 @@
+create or replace function sum2(a IN NUMBER, b IN NUMBER) RETURN NUMBER IS
+  total NUMBER;
+BEGIN
+  total := a + b;
+  RETURN total;
+END sum2;
+/
+
+
+//this could be very wrong, image was very dillusional

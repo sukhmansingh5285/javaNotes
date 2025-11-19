@@ -1,0 +1,14 @@
+==============================
+Creating a Database:
+==============================
+
+create database codesquadz18 ;
+use databasename;
+
+CREATE USER 'codesquadz18'@'localhost' IDENTIFIED BY 'codesquadz18';
+GRANT ALL PRIVILEGES ON *.* TO 'codesquadz18'@'localhost' WITH GRANT OPTION;
+
+------------------------------
+
+CREATE USER 'estore'@'localhost' IDENTIFIED BY 'estore';
+GRANT ALL PRIVILEGES ON *.* TO 'estore'@'localhost' WITH GRANT OPTION;

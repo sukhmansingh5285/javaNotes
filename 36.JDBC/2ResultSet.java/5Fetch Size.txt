@@ -1,0 +1,22 @@
+Fetch Size
+
+By default, when Oracle JDBC executes a query, it receives the result set 10 rows at a time from the database cursor. This is the default Oracle 
+row-prefetch value. You can change the number of rows retrieved with each trip to the database cursor by changing the row-prefetch value.
+
+JDBC 2.0 also allows you to specify the number of rows fetched with each database round trip for a query, and this number is referred to as the fetch size. 
+In Oracle JDBC, the row-prefetch value is used as the default fetch size in a statement object. Setting the fetch size overrides the row-prefetch 
+setting and affects subsequent queries executed through that statement object.
+
+Fetch size is also used in a result set. When the statement object executes a query, the fetch size of the statement object is passed to the result 
+set object produced by the query. However, you can also set the fetch size in the result set object to override the statement fetch size that was 
+passed to it. (Also note that changes made to a statement object's fetch size after a result set is produced will have no affect on that result set.)
+
+Setting the Fetch Size
+
+The following methods are available in all Statement, PreparedStatement, CallableStatement, and ResultSet objects for setting and getting the fetch size:
+
+	void setFetchSize(int rows) throws SQLException
+	int getFetchSize() throws SQLException
+
+To set the fetch size for a query, call setFetchSize() on the statement object prior to executing the query. If you set the fetch size to N, then N 
+rows are fetched with each trip to the database.

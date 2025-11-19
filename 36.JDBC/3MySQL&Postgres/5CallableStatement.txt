@@ -1,0 +1,15 @@
+Stored Procedures are group of statements that we compile in the database for some task.
+Stored procedures are beneficial when we are dealing with multiple tables with complex scenario and rather than sending 
+multiple queries to the database, we can send required data to the stored procedure and have the logic executed in the 
+database server itself.
+
+JDBC API provides support to execute Stored Procedures through CallableStatement interface.
+Stored Procedures requires to be written in the database specific syntax
+
+A java.sql.CallableStatement is used to call stored procedures in a database.
+
+A stored procedure is like a function or method in a class, except it lives inside the database. Some database heavy 
+operations may benefit performance-wise from being executed inside the same memory space as the database server, as a
+ stored procedure.
+
+============================================================
