@@ -27,3 +27,15 @@ public class MyBatchPreparedStmt {
 		}
 	}
 }
+
+
+// general syntax, batch statement with prepareStatement (for insert)
+/*
+PreparedStatement ps = con.prepareStatement(
+"INSERT INTO emp101(name, pass) VALUES (?, ?)"
+);
+ps.setString(1, "alice"); ps.setString(2, "pwd1"); ps.addBatch();
+ps.setString(1, "bob"); ps.setString(2, "pwd2"); ps.addBatch();
+ps.setString(1, "carol"); ps.setString(2, "pwd3"); ps.addBatch();
+int[] counts = ps.executeBatch();
+*/

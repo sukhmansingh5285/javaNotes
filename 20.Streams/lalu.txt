@@ -1,6 +1,1 @@
-Conventional treatment methods make even the most basic healthcare issues more complicated,  
-which in turn increases the number of parties involved. Classical computing lacks the speed and accuracy needed for 
-effective stakeholde collaboration in COVID-19 healthcare solutions, such as patients, insurance agents, healthcare practitioners,
- pharmaceutical suppliers, etc The research uses organizational information processing theory (OIPT) to examine how quantum computing which is
-  applications of artificia intelligence (AI) could transform the healthcare business, creating a more sustainable and less burdened system. The study
-   of quantu computing (QC) has the potential to bring about “quantum leaps,” which might have unforeseen consequences for healthcare.i am a goat
+Conventional treatment methods make even the most basic healthcare issues more complicated,  which in turn increases the number of parties involved. Classical computing lacks the speed and accuracy needed for effective stakeholde collaboration in COVID-19 healthcare solutions, such as patients, insurance agents, healthcare practitioners, pharmaceutical suppliers, etc The research uses organizational information processing theory (OIPT) to examine how quantum computing which is applications of artificia intelligence (AI) could transform the healthcare business, creating a more sustainable and less burdened system. The study of quantu computing (QC) has the potential to bring about “quantum leaps,” which might have unforeseen consequences for healthcare.

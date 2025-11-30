@@ -36,3 +36,20 @@ class TestRetrive2
     } catch(Exception i) {System.out.println(i); }
   }
 }
+
+// position of jar file in each database->
+// C:\oraclexe\app\oracle\product\10.2.0\server\jdbc\lib\ojdbc14.jar
+// C:\Program Files (x86)\MySQL\MySQL Server 5.1\jdbc\mysql-connector-java-5.1.13-bin.jar  (port: 5432, password:hellyeah5285)
+// C:\Program Files\PostgreSQL\13\jdbc\postgresql-42.3.3.jar (port 3306, password: hellyeah5285)
+/* gemini said, that ports are swapped */ 
+
+/*
+3. Summary of Connection Details
+For your future Java code, use these details:
+
+Database	Driver Class	URL	User	Password
+Oracle	oracle.jdbc.driver.OracleDriver	jdbc:oracle:thin:@localhost:1521:XE	system	hellyeah5285
+MySQL	com.mysql.jdbc.Driver	jdbc:mysql://localhost:3306/	root	hellyeah5285
+PostgreSQL	org.postgresql.Driver	jdbc:postgresql://localhost:5432/postgres	postgres	hellyeah5285
+
+*/

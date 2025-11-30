@@ -27,3 +27,14 @@ class BatchUpdate
 		}
 	}
 }
+
+
+/*
+Statement
+You can batch multiple plain SQL commands (like INSERT, UPDATE, DELETE).
+Example:
+Statement s = con.createStatement();
+s.addBatch("INSERT INTO ...");
+s.addBatch("UPDATE ...");
+s.executeBatch();
+*/

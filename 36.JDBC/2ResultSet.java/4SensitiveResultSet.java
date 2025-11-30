@@ -15,7 +15,7 @@ public class SensitiveResultSet {
 		ResultSet rs = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "mca6");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "hellyeah5285");
 			DatabaseMetaData dbmd = con.getMetaData();
 			//System.out.println("Supports HOLD CURSORS OVER COMMIT? " + dbmd.supportsResultSetHoldability(ResultSet.HOLD_CURSORS_OVER_COMMIT));
 			boolean b = dbmd.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE);
@@ -71,7 +71,7 @@ class MyThread2 extends Thread {
 	public void run() {
 		try {
 			st.execute("UPDATE bank1 SET bal=bal+500");
-			st.execute("COMMIT");
+			st.execute("COMMIT"); //this also works other than the 'connection.commit();'
 			st.close();
 			System.out.println("record updated");
 			Thread.sleep(1000);
@@ -80,3 +80,16 @@ class MyThread2 extends Thread {
 		}
 	}
 }
+
+
+/* The confusion arises because transaction management (like committing) is tied to the database connection, not individual statements. Here's a breakdown:
+
+-> Both st and st1 are created from the same Connection object (con). This means they share the same transaction context.
+-> When st1 executes COMMIT, it commits the entire transaction for the connection. Normally, this would close all open result sets from that connection.
+-> However, the result set rs is created from st, which was explicitly set with ResultSet.HOLD_CURSORS_OVER_COMMIT. This tells JDBC to keep rs open even after 
+a commit on the same connection.
+-> If st1 had created its own result set, that result set would close on commit (since st1 doesn't specify holdability, it defaults to CLOSE_CURSORS_AT_COMMIT). 
+But here, st1 is only used for the update and commit, so it doesn't affect rs directly—except through the shared transaction.
+
+In short: The commit from st1 affects the connection's transaction, but rs (from st) is protected by its holdability setting. This allows MyThread1 to 
+continue accessing rs after the commit. If you removed HOLD_CURSORS_OVER_COMMIT, rs would close after the commit, and the second loop in MyThread1 would fail. */

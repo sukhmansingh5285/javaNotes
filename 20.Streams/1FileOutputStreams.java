@@ -4,8 +4,8 @@ class MyFileWriter{
   public static void main(String s1[]) throws IOException{ 
     // FileOutputStream fw = new FileOutputStream("lalu.txt"); // Write Mode, uses string constructer
     // FileOutputStream fw = new FileOutputStream("lalu.txt", true); // append mode
-    FileOutputStream fw = new FileOutputStream(new File("D://Local Disk E//mJAVA//demo//20.Streams//lalu.txt")); //Write Mode, uses file object constructer
-    // FileOutputStream fw = new FileOutputStream(new File("D://Local Disk E//mJAVA//demo//20.Streams//lalu.txt"), true); //append mode
+    FileOutputStream fw = new FileOutputStream(new File("D:\\mJAVA\\javaProgram\\javaNotes\\20.Streams\\lalu.txt")); //Write Mode, uses file object constructer
+    // FileOutputStream fw = new FileOutputStream(new File("D:\\mJAVA\\javaProgram\\javaNotes\\20.Streams\\lalu.txt"), true); //append mode
 
     String s = "Conventional treatment methods make even the most basic healthcare issues more complicated, " + 
     " which in turn increases the number of parties involved. Classical computing lacks the speed and accuracy needed for effective stakeholde" +

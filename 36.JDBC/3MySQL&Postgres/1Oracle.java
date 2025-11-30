@@ -44,3 +44,7 @@ class Oracle
     }
 }
 //C:\oraclexe\app\oracle\product\10.2.0\server\jdbc\lib\ojdbc14.jar
+
+/* s.close() only closes the Statement, not the transaction.  (s is a statement)
+connection.commit() is the standard, portable way to commit a transaction.
+st.execute("COMMIT") commits via SQL, but is less portable and not recommended unless you have a specific (st is also statement)*/

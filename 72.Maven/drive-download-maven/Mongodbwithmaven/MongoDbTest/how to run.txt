@@ -1,0 +1,8 @@
+mvn exec:java -Dexec.mainClass="com.test.JavaMongoDBConnection"
+mvn exec:java -Dexec.mainClass="com.test.MySql"
+
+
+
+
+
+

@@ -27,7 +27,7 @@ DatabaseMetaData dbmd = c.getMetaData();
 boolean b = dbmd.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE);
 // there are 3 ResultSet types:-
     ResultSet.TYPE_FORWARD_ONLY
-    ResultSet.TYPE_SCROLL_INSENSITIVE
+    ResultSet.TYPE_SCROLL_SENSITIVE
     ResultSet.TYPE_SCROLL_INSENSITIVE
 
 /* The default is TYPE_FORWARD_ONLY

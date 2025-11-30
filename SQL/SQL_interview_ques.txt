@@ -1,0 +1,14 @@
+Top SQL Interview Questions and Answers
+
+1. What is the primary difference between SQL and PL/SQL?
+-> PL/SQL is an advanced form of SQL developed by Oracle in early 90's as a superset of SQL. It inculates many additional 
+   programming features to enable application development at the database level.
+
+2. What is the main difference between primary key, unique key, and Foreign Key?
+-> Following are the key differences between primary key, unique key, and foreign key.
+  
+  Primary Key:
+  The primary key can't have a NULL value.
+  Every table can have only one primary key.
+
+  By default, Primary Key supports clustered index. Thus data in the database table are physically organized in the sequence of clustered

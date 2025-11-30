@@ -1,0 +1,21 @@
+1:- create directry structure src/main/java
+that would be your main code folder then create your package in java folder.
+2:- create pom.xml in the root folder(HelloJava parallel to src) of project.
+
+
+3:- create a build by giving the following command from the root folder(in which pom.xml is exist)
+
+mvn clean install
+
+4:- run this comman on dos prompt from root folder:
+java -cp target/HelloWorld-1.jar com.test.Demo
+or
+mvn exec:java -Dexec.mainClass="com.test.Demo"
+
+
+
+
+
+
+
+

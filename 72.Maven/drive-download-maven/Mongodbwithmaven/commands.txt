@@ -1,0 +1,16 @@
+mvn install:install-file -Dfile=ojdbc14.jar   -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=11.2.0 -Dpackaging=jar
+
+
+
+C:\Users\Manish\.m2\repository
+
+
+mvn clean
+mvn install
+mvn clean install
+
+
+
+
+
+java -cp target/HelloWorld-1.jar com.test.Demo

@@ -1,0 +1,16 @@
+1:- Since ojdbc14 is not in globle repo so we have to download the jar and has to copy the same in our local repo using following command:
+this coomand run from the folder in which ojdbc.14 file is stored
+
+mvn install:install-file -Dfile=ojdbc14.jar   -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=11.2.0 -Dpackaging=jar
+
+2:- now create pom.xml
+3:- create directory structure src/main/java
+4:- create you java file(create packages as well if you want)
+
+5:- run  command 
+mvn clean install
+
+this command is used to create the build
+
+6:- run this comman on dos prompt from root folder:
+mvn exec:java -Dexec.mainClass="com.test.JavaMongoDBConnection"

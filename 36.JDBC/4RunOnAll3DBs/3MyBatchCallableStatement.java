@@ -29,3 +29,13 @@ public class MyBatchCallableStatement {
 		}
 	}
 }
+
+/*
+CallableStatement
+You batch multiple calls to a stored procedure or function, each with its own parameters.
+Example:
+CallableStatement cs = con.prepareCall("{call proc(?, ?)}");
+cs.setInt(1, 1); cs.setString(2, "A"); cs.addBatch();
+cs.setInt(1, 2); cs.setString(2, "B"); cs.addBatch();
+cs.executeBatch();
+*/

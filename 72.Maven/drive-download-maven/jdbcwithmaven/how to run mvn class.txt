@@ -1,0 +1,3 @@
+mvn exec:java -Dexec.mainClass="com.test.Demo"
+mvn exec:java -Dexec.mainClass="com.test.TestRetrive"
+mvn exec:java -Dexec.mainClass="com.test.App"
