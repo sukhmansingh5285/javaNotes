@@ -1,0 +1,35 @@
+# Using SAX Parser
+
+SAX Parser is different from the **DOM Parser**. SAX parser doesn’t load the complete XML into memory. Instead, it parses the XML line 
+by line, triggering different events as it encounters elements like opening tags, closing tags, character data, comments, etc. 
+This is why SAX Parser is called an event-based parser.
+
+Along with the XML source file, we also register a handler that extends the `DefaultHandler` class. The `DefaultHandler` class provides 
+different callbacks, out of which we are mainly interested in:
+
+- `startElement()` — triggers when the start of a tag is encountered.
+- `endElement()` — triggers when the end of a tag is encountered.
+- `characters()` — triggers when some text data is encountered.
+
+Java SAX Parser provides an API to parse XML documents. SAX Parsers are different from DOM parsers because they don’t load the 
+complete XML into memory and read XML documents sequentially.
+
+`javax.xml.parsers.SAXParser` provides methods to parse XML documents using event handlers. This class implements the `XMLReader` 
+interface and provides overloaded versions of `parse()` methods to read XML documents from File, InputStream, SAX InputSource, and String URI.
+
+The actual parsing is done by the Handler class. We need to create our own handler class to parse the XML document. To do this, 
+implement the `org.xml.sax.ContentHandler` interface to create custom handler classes. This interface contains callback methods that 
+receive notifications when any event occurs, for example: `StartDocument`, `EndDocument`, `StartElement`, `EndElement`, `CharacterData`, etc.
+
+`org.xml.sax.helpers.DefaultHandler` provides a default implementation of the `ContentHandler` interface. We can extend this class to 
+create our own handler. It’s advisable to extend this class because we might need to implement only a few of the methods.
+
+**Main callback methods:**
+
+- startDocument
+- startElement
+- characters
+- comments
+- processing instructions
+- endElement
+- endDocument

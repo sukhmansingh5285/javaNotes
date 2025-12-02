@@ -1,3 +1,5 @@
+// if i added something on my own, i will put it after '//'
+
 Top SQL Interview Questions and Answers
 
 1. What is the primary difference between SQL and PL/SQL?
@@ -11,4 +13,175 @@ Top SQL Interview Questions and Answers
   The primary key can't have a NULL value.
   Every table can have only one primary key.
 
-  By default, Primary Key supports clustered index. Thus data in the database table are physically organized in the sequence of clustered
+  By default, Primary Key supports clustered index. Thus data in the database table are physically organized in the sequence of clustered index.
+  It can be related to another table as a Foreign Key.
+  It supports the generation of ID automatically with the help of Auto Increment field. 
+
+  Unique Key:
+  Unique constraint may have a NULL value.
+  Each table can have more than one Unique Constraint.
+  By default, Unique key is a unique non-clustered index.
+
+  It is not related to another table as a Foreign Key.
+  Unique Constraint doesn't support Auto Increment value.
+
+  Foreign Key:
+  A Foreign Key is a field in a table whereas, it is the primary key in another table.
+
+  It can accept multiple null values.
+  A Foreign key does not automatically create an index, clustered or non-clustered. You must manually create an index on the foreign key.
+  We can have more than one foreign key in a table.
+
+  There are advantages of having a foreign key supported with a clustered index, but you get only one per table. The advantage using a clustered index is that, on 
+  selecting the parent plus all child records, it can bring all child records next to each other.
+  The Foreign key shouldn't have a null value. Else, the system will consider it as an orphan record.
+  // this is how you can create an index on a column in a table -> CREATE INDEX idx_name ON Table_Name(Column_Name);
+  // ORDER BY: Sorts the output of your query, not the actual storage.
+  // Clustered Index: Sorts the actual data rows on disk by that column.
+
+  3.What is the purpose of a JOIN statement? Also, explain the different types of JOIN clauses supported in SQL.
+  -> JOIN keyword is used to fetch data from two or more related table. It returns rows where there is at least one match in both the tables included in the join.
+     
+     SQL specifies five types of JOIN clauses as follows: 
+
+     a) INNER JOIN (also called as 'simple join')
+       It returns all the rows for which there is at least one match in BOTH the tables. If join type is not specifically mentioned then 'INNER JOIN' works as
+       the default join. 
+       SQL Syntax for INNER JOIN:
+       SELECT column_name(s)
+       FROM table1
+       INNER JOIN table2
+       ON table1.column_name = table2.column_name
+      
+     b) LEFT JOIN (or LEFT OUTER JOIN):
+       Returns all rows from left table, and the matching rows from the right table. Thus, the result will contain all records from the left table, even if the
+       JOIN condition doesn't find any matching records in the right table. This means, that if the "ON" clause does not match to any records in the right table,
+       the JOIN will return a row in the result for that record in the left table, but with NULL in each column from the right table.
+
+       SQL Syntax for LEFT JOIN:
+       SELECT column_name(s)
+       FROM table1
+       LEFT JOIN table2
+       ON table1.column_name = table2.column_name;
+
+     c) RIGHT JOIN (or RIGHT OUTER JOIN):
+       It returns all rows from the right table and the corresponding matching rows from the left table. It is an exact opposite of the LEFT JOIN. Thus the result 
+       will contain all the records form the right table, even if the JOIN condition doesn't find any matching records in the left table. This means, that if the "ON"
+       clause does not match to records in the left table, the JOIN will return a row in the result for that record in the right table, but with NULL in each column
+       from the left table.
+
+       SQL Syntax for the RIGHT JOIN:
+       SELECT column_name(s)
+       FROM table1
+       RIGHT JOIN table2
+       ON table1.column_name = table2.column_name;
+
+     d) FULL JOIN (or FULL OUTER JOIN):
+       It returns all the rows for which there is a match in either of the tables. Fundamentally, a FULL JOIN is a combination of the effect produced by both a LEFT
+       JOIN and a RIGHT JOIN. Thus we can say that its result set is equivalent to performing a UNION of the results of left and right outer queries.
+
+       SQL Syntax for FULL OUTER JOIN: 
+       SELECT column_name(s)
+       FROM table1
+       FULL OUTER JOIN table2
+       ON table1.column_name = table2.column_name;
+
+     e) CROSS JOIN:
+       It returns a result set which is multiplication of the number of rows in the first and the second table. If we do not apply WHERE clause along with CROSS JOIN, it
+       returns the Cartesian Product. However, if we use WHERE clause along with CROSS JOIN, it functions like an INNER JOIN.
+       An alternative way of achieving the same result is to use column names separated by commas after SELECT and mentioning the table names involved, after a FROM clause.
+
+       SQL Syntax for CROSS JOIN:
+       SELECT column_name(s)
+       FROM table1
+       CROSS JOIN table2;
+
+     f) SELF JOIN:
+       It is used to join a table to itself as if the table were two tables. To achieve this, we temporarily rename one or more tables in the SQL statement (using AS).
+
+       SQL Syntax:
+       SELECT column_name(s)
+       FROM table1, table2
+       WHERE table1.common_field = table2.common_field;
+
+
+  4. What is Normalization and how does it work?
+  -> It is the process of designing database tables to minimize the data redundancy.
+     We need to divide a database into two or more tables and define relationships between them.
+
+  5. What are the various forms of Normalization?
+  -> Database Normalization process provides following forms:
+     
+     a) First Nomral Form (1NF)
+       As per the rule of 1NF, an attribute(column) of a table can't hold multiple values. It should contain only atomic values. 
+       For example suppose a company stores details of its employees including the name, address, and the contact number. It is possible that some employees have more than
+       one contacts. In that case, employee table is like this:
+
+       emp_id  emp_name   emp_address   emp_contact
+       --------------------------------------------
+       001     Nidhi      Gurgaon       9873456789, 9990022334
+       002     Prakash    New Delhi     7838777343
+       003     Mallika    New Delhi     7838005674, 8876453212
+
+       Since multiple contact numbers are for the same employees so it gets stored in the same field. As per the 1NF rule, the above table is not in 1NF. To make the table
+       as 1NF compilant, we have to score only a single contact in one row as:
+
+       emp_id  emp_name   emp_address   emp_contact
+       --------------------------------------------
+       001     Nidhi      Gurgaon       9873456789
+       001     Nidhi      Gurgaon       9990022334
+       002     Prakash    New Delhi     7838777343
+       003     Mallika    New Delhi     7838005674
+       003     Mallika    New Delhi     8876453212
+
+     b) Second Nomral Form (2NF):
+       A table is in 2NF if the following conditions hold true:
+         The table is in 1NF.
+         No one-prime attribute is dependent on the proper susbet of any candidate key of the table.
+
+       An attribute that is not part of any candidate key is known as a non-prime attribute.
+       For example, a school stores data about the teachers and the subject they teach. A teacher can teach more than one subject. Thus the table will lool like:
+
+       teacher_id  subject     teacher_age
+       -----------------------------------
+       01A         Maths       40
+       01A         Physics     40
+       01B         English     42
+       01C         Chemistry   40
+       01C         EVS         40
+
+       Candidate Keys: (teacher_id, subject)
+       NonPrime attribute: teacher_age
+       The table is in 1NF. However, it is not in 2NF because nonprime attribute teacher_age is dependent on teacher_id alone which is a proper subset of the
+       candidate key.
+
+       Now, to make the table as 2NF compliant, we break the table as follows:
+
+       teacher_id  teacher_age
+       -----------------------
+       01A         40
+       01B         42
+       01C         40
+
+       teacher_id  subject
+       -------------------
+       01A         Maths
+       01A         Physics
+       01B         English
+       01C         Chemistry
+       01C         EVS
+
+     c) Third normal form (3NF):
+       A table is in 3NF if both the given conditions hold true:
+       The table is in 2NF.
+       For every functinal dependency (X->Y), at least one of the following conditions hold:
+       X is a super key of the table.
+       Y is a prime attribute of the table. 
+       A prime attribute is an attribute that is part of the candidate key.
+
+       Suppose we have a table that stores information about employee address as:
+
+
+
+
+resume from 12th page

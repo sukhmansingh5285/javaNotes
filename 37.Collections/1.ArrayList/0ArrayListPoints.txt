@@ -1,0 +1,54 @@
+Some of the important points about ArrayList class are shown below:
+
+1. ArrayList is not synchronized.
+
+2. ArrayList supports dynamic arrays which can grow as needed.
+
+3. Size of ArrayList can be dynamically increased or decreased.
+
+4. ArrayLists are created with initial size 10.
+
+5. ArrayList can contain duplicate elements. ArrayList maintains insertion order of the elements.
+
+6. ArrayList is not a synchronized collection, hence it is not suitable to be used between multiple threads concurrently. 
+If you want to use ArrayList like data-structure in a multi-threaded environment, then you need to either use new CopyOnWriteArrayList
+ or use Collections.synchronizedList() to create a synchronized List.
+
+7. CopyOnWriteArrayList is part of the concurrent collection package and is much more scalable than a synchronized List, but only useful 
+when there are many readers and only a few writes. Since a new copy of ArrayList is created every time a write happens, it can be 
+overkill if used in a write-heavy environment. Collections.synchronizedList() is a strictly synchronized collection, much like Vector 
+or Hashtable, but it's not scalable because once the number of threads increases drastically, contention becomes a huge issue.
+
+8. CopyOnWriteArrayList is recommended for concurrent multi-threading environments as it is optimized for multiple concurrent reads 
+and creates a copy for write operations. This was added in JDK 1.5. It's part of java.util.concurrent package, along with ConcurrentHashMap.
+
+9. When ArrayList gets full, it creates another array and uses System.arraycopy() to copy all elements from one array to another. 
+This is where insertion takes a lot of time.
+
+10. Iterator and ListIterator of Java ArrayList are fail-fast. It means if ArrayList is structurally modified at any time after the 
+Iterator is created, in any way except through the iterator's own remove or add methods, the Iterator will throw a 
+ConcurrentModificationException. Thus, in the face of concurrent modification, the Iterator fails quickly and cleanly; that's why it's called fail-fast.
+
+11. ConcurrentModificationException is not guaranteed and is only thrown at best effort.
+
+12. If you are creating a Synchronized List, it's recommended to do so while creating the instance of the underlying ArrayList to prevent 
+accidental non-synchronized access to the list.
+
+13. An application can increase the capacity of an ArrayList instance before adding a large number of elements using the ensureCapacity() 
+operation. This may reduce the amount of incremental reallocation due to incremental filling of ArrayList.
+
+14. The size(), isEmpty(), get(), set(), iterator(), and listIterator() operations run in constant time because ArrayList is based on an 
+array, but adding or removing an element (except at the end) is costly as it may require shifting elements.
+
+// i missed notes created with AI, rest of them.
+15. ArrayList allows null elements.
+
+16. ArrayList is not suitable for primitive types directly; it can only store objects. For primitives, use wrapper classes (e.g., Integer, Double).
+
+17. ArrayList is preferred over Vector in most cases as Vector methods are synchronized and thus slower.
+
+18. ArrayList implements RandomAccess interface, so it provides fast random access with O(1) time complexity for get and set operations.
+
+19. ArrayList can be converted to an array using toArray() method.
+
+20. ArrayList is serializable, so it can be used for object serialization.

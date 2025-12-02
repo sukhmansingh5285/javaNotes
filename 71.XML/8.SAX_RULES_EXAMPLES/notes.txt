@@ -1,0 +1,29 @@
+// SAX XML Parsing Example Notes
+
+// MyHandler.java
+// - Extends DefaultHandler
+// - Uses boolean flags (bAge, bName, bGender, bRole) to track which element is being parsed
+// - startElement: initializes Employee object, sets id, and flags for fields
+// - endElement: adds Employee to list when </Employee> is found
+// - characters: sets the value for the current field based on the flag
+
+// XMLParserSAX.java
+// - Main class to run SAX parsing
+// - Creates SAXParser and MyHandler
+// - Parses employees.xml and prints Employee objects
+
+// Employee.java
+// - POJO for Employee with id, name, gender, age, role
+// - Getters, setters, and toString() for pretty printing
+
+// employees.xml
+// - Sample XML file with Employee data
+// - Each Employee has id, age, name, gender, and role
+
+// How it works:
+// 1. SAXParser reads employees.xml
+// 2. MyHandler creates Employee objects as it parses
+// 3. Data is set using characters() and boolean flags
+// 4. List<Employee> is returned and printed
+
+// This is a basic example of SAX parsing in Java for educational purposes.
