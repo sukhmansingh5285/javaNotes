@@ -1,0 +1,15 @@
+these codes are to be used for the interview conditions also, like lock on lock, object, method, class, and using
+static keyword, too.
+
+
+there were 5/6 ways, these are what i remember
+
+normal method synchronization
+
+synchronized class and tutor made some method static to show the class lock
+
+synchronized block, you have commented a lot to show this one
+
+tutor also created deadlock where program hanged and all the threads were in pool when 1 thread got suspened in the code,
+so later suspend and resume methods was deprecated, and 2 new methods were created -> wait and notify (4, 5, 6 programs are based on it,
+ which are in 2.wait&notify folder)

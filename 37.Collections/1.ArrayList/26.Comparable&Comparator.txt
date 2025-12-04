@@ -1,0 +1,4 @@
+Difference between Comparable and Comparator:-
+
+Via Comparable interface you can have sorting only on one field of an object.
+Via Comparator interface you can have sorting on multiple fields of an object.
