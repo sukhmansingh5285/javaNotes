@@ -1,0 +1,24 @@
+You are exploring the critical difference between a standard ArrayList and a thread-safe CopyOnWriteArrayList in Java, 
+specifically how they handle modification while iterating.
+
+To understand these two codes, you need to understand two concepts: Fail-Fast vs. Fail-Safe iterators.
+
+1) The Problem: ArrayList (Fail-Fast).
+-> Standard ArrayList is not designed for multi-threaded environments. (Not Thread Safe)
+-> If one thread is iterating over an ArrayList (reading it) and another thread simultaneously modifies it 
+   (adds or removes elements), the iterator quickly realizes the list has changed effectively "under its feet."
+-> The Result: To prevent unpredictable behavior, the iterator immediately throws a ConcurrentModificationException. 
+   It fails "fast" rather than risking incorrect data processing.
+
+2) The Solution: CopyOnWriteArrayList (Fail-Safe)
+-> Thread-Safe: This class is part of the java.util.concurrent package.
+-> Snapshot Concept: When you create an Iterator for a CopyOnWriteArrayList, it takes a "snapshot" of the array as it existed at that exact moment.
+-> Copy-On-Write: If another thread tries to modify the list(add/remove), Java does not change the original array that the iterator is using.
+   Instead, it makes a fresh copy of the internal array, makes the change to that new copy, and then updates the reference.
+-> The Result: The reading thread continues iterating over the "old" snapshot without crashing. It won't see the new changes immediately, but it
+   won't crash.
+
+
+1ArrayListProb.java demonstrates the crash that happens when using ArrayList in a multi-threaded way.
+
+2CopyOnWriteArrayListE.java fixes the crash by switching the list type.

@@ -1,0 +1,122 @@
+// Methods and Definition
+public Object put (Object k, Object v)
+public Object remove (Object k)
+public int size()
+public Collection values()
+public Set keySet()
+public Object get (Object k)
+public boolean isEmpty()
+public void clear()
+public boolean containsKey(Object k)
+public void putAll(Map m)
+public Set entrySet()
+
+Map Interface -> A Map defines mapping from keys to values. The key value pair is called entry. A Map doesn't allow duplicate keys
+                 that means keys are unique. Each key maps to one value which is called single valued map. Both the keys and values
+                 must be Object. Map is not Collection and the Map interface doesn't extend the Collection interface.
+
+
+
+// how to create hashmaps
+HashMap hm = new HashMap();
+hm.put("1001", "aaaa");
+hm.put("1002", "bbb");
+hm.put("1003", "cccc");
+hm.put("1001", "ddd");
+
+
+
+
+
+// structure of HashMap class and what happens under the hood
+class HashMap
+{
+  Entry table[];
+
+  class Entry implements Map.Entry
+  {
+    Object k;
+    Object v;
+    Entry next;
+    Entry(Object k, Object v)
+    {
+      this.k = k;
+      this.v = v;
+    }
+  }
+
+  HashMap()
+  {
+    table = new Entry[16];
+  }
+
+  public void put(Object k, Object v)
+  {
+    Entry e = new Entry(k, v);
+    int hc = e.k.hashCode();
+    int index = hc%16;
+
+    boolean b = e.k.equals("1001");
+  }
+}
+
+
+
+/******** Theory of HashMap *****************/
+// Points On Hash Map:-
+  The Class whose object you want to add in HashMap as key that class must override two methods of object class:- deldeldeldeldeldel
+  a) public int hashcode();
+  b) public boolean equals(object o)
+
+  1. HashMap class has a one nested class with a name Entry (Node from jdk1.8) which implements a one interface called Map.Entry
+     interface.
+  2.Map interface also have a one nested interface called Entry and this interface has got 3 methods:-
+      -> public Object getKey();
+      -> public Object getValue();
+      -> public int hashCode();
+  3. Whenever we create the object of HashMap class using the default constructor than one Entry(Node from jdk1.8) class array will
+     be created of size 16 which is known as capacityof HashMap.
+  4. Each index of this array is called a bucket.
+  5. And each bucket is a linked list.
+  6. Whenever we add any key value pair in a HashMap class using a put method, the put method first convert this key-value pair into
+     the single object of an Entry(Node from jdk1.8) class and this Entry(Node from jdk1.8) class object is going to be stored into
+     the array of this class which is defined in a HashMapclass.
+
+// How an Entry(Node from jdk1.8) class object is stored in a array?
+  Step 1: The HashCode of the Key class Object is first calculated.'
+  Step 2: Calculating the remainder of this hashcode by dividing it via total number of bucket or capacity.
+  Step 3: This remainder is treated as an index of bucket.
+  Step 4: Once the bucket is decided than the equals method is called on a Key class Object and than passes existing Key 
+          class Object into this method one by one.
+  If the KeyMatch is found than the Entry(Node from jdk1.8) class object is not added into the bucket but value of the key 
+  will boolean replaced by new value. Otherwise this Entry class object is added in a bucket as a first node of a 
+  linked list which is maintained by a bucket.
+
+// Some important Points on HashMap
+  1. The default size of an array is 16(always power of 2) and the loadfactor is 0.75
+  2. Hence to avoid rehashing of the data structure(as it degrade the performance) as elements grow it is the best practice to 
+     explicitly give the size of the hashmap while creating it. Never give the capacity too high and load Factor too low.
+  3. Since java is multithreaded it is very possible that more than one thread might be using same hashmap and then they 
+     both realize the need for resizing the hashmap at the same time which leads to race condition.
+  4. What is race condition with respect to hashmaps:-
+     When two or more threads see the need for resizing the same hashmap,they might end up adding the elements of old bucket to 
+     the new bucket simultanously and hence might lead to infinite loops. in case of colllision,i.e. when there are different 
+     keys with same hashcode,internally we use single linked list to store the elements.And we store every new element at the 
+     head of the linked list to avoid tail traversing and hence at the time of resizing the entire sequence of objects in 
+     linked list gets reversed,during which there are chances of infinite loops.
+
+     For example,lets assume there are 3 keys with same hashcode and hence stored in linked list inside a bucket[below format 
+     is in Object_Value(current_address,next_address)]
+
+     Initial Structure: 1(100,200) ->2(200,300) ->(300,null) After resizing by thread-1 : 3(300,200) ->2(200,100) ->(100,null) 
+     when thread-2 starts resizing,
+     its again starts with 1st element by placing it at the head: 1(100,300) ->3(300,200) ->2(200,100) ==>which becomes a 
+     infinite loop for next insertion and thread hangs here.
+
+
+// HashMap has a static class named Entry(Node from jdk1.8) which implements Map.Entry interface.The Entry class looks like:
+
+   static class Entry(Node from jdk1.8) implements Map.Entry 
+    { 
+      final Object key; 
+      Object Value;

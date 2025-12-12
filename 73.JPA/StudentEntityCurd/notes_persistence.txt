@@ -1,0 +1,4 @@
+// i created this file in my own capacity
+
+first 2 lines, let's just say that they are important and will be used each time for now
+<persistent-unit name = "JPA" ...> - this 

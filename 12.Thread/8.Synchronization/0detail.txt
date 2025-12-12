@@ -1,3 +1,4 @@
+detail for (shared.java and customThread.java)
 these codes are to be used for the interview conditions also, like lock on lock, object, method, class, and using
 static keyword, too.
 

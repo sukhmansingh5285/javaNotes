@@ -7,7 +7,7 @@ that would be your main code folder then create your package in java folder.
 
 mvn clean install
 
-4:- run this comman on dos prompt from root folder:
+4:- run this command on dos prompt from root folder:
 java -cp target/HelloWorld-1.jar com.test.Demo
 or
 mvn exec:java -Dexec.mainClass="com.test.Demo"
