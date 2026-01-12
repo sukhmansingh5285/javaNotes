@@ -1,0 +1,37 @@
+// what each file means, and what does it do: 
+
+1. MyFrame.java (Executable JAR)
+
+A JAR is basically a ZIP that packages .class files (and resources). If it contains a Main-Class entry in its manifest, it becomes an executable JAR (meaning java -jar ... knows what main() to run).
+A WAR is also a ZIP, but it’s packaged in a layout that a web container (Tomcat/Jetty, etc.) understands. You usually deploy a WAR into a server; you don’t normally “run it” the same way as a plain JAR.
+
+Steps:
+  1) Create a Manifest File(my mf). For now, just remember it is important and used to store information about jar
+  2) Compile:   javac MyFrame.java
+  3) Create runnable JAR:   jar cvfm t1.jar "my mf" MyFrame.class
+  4) Run it:    java -jar t1.jar
+
+  What's Happening:-
+  -> A JAR is basically a ZIP with a standard layout.
+  -> jar ... m "my mf" copies your manifest into META-INF/MANIFEST.MF.
+  -> java -jar t1.jar ignores your normal classpath and uses the manifest’s Main-Class to decide what to run.
+
+
+
+2. Temp2.java
+
+  Steps:-
+  1) compile the java file (Temp1.java) in package p1, like -> p1/Temp1.class
+  2) do same for the Temp2.java file, p2/Temp2.class
+  3) create a manifest file for the Temp2.java (temp2.mf)
+  4) Package the JAR including the package folders -> 'jar cvfm temp2.jar temp2.mf p1 p2'
+  5) Run : 'java -jar temp2.jar'
+
+  What’s happening: The JAR must contain the directory structure that matches the packages. 
+  If you jar only Temp2.class without the p1/ folder, it will fail at runtime because p1.Temp1 can’t be found.
+
+Important points:-
+/*
+And if you want an executable JAR for Temp2, the manifest must say:
+Main-Class: p2.Temp2
+*/

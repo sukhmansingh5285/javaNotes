@@ -1,0 +1,18 @@
+
+MyClient1 -> creates the object(emp) and saves it.
+It writes this object to a file named appsquadz3 using ObjectOutputStream.
+
+MyServer -> reads from appsquadz3
+prints name and age successfully, a:0 (was transient, 0 is default for integers), b:0(static), z:0(Base isn't serialized)
+
+Same process in MyClient2 and MyServer1
+
+
+///////////////////////////////////////////////////////
+
+Base.java -> parent class with variable z
+emp.java -> child class who implements serializable.
+
+transient -> The transient keyword in Java is used to indicate that a field should not be serialized when an 
+              object is written to a stream
+Static and parent inherited are also not serialized (if parent didn't implemented Serializable)

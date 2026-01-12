@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+<!-- web-app is just the root elements -->
+
+<!-- display-name = A human-readable name for the web application. It doesn't affect URLs or behavior. -->
+  <display-name>MyApp</display-name>
+
+<!-- Application-wide configuration. Defines global parameters for the entire web application. Avaliable to all services, filters, listeners. -->
+  <context-param>
+    <param-name>globalTimeout</param-name>
+    <param-value>30</param-value>
+  </context-param>
+  <!-- 
+  This is how to access them -> String timeout = getServletContext().getInitParameter("globalTimeout");
+   -->
+
+<!-- <servlet> -> this is servlet declaration. Logical name + Implementation class (mandatory)
+     <init-param> -> Configuration only for this servlet. Each servlet can have its own private config.
+                     Access Code -> String greeting = getServletConfig().getInitParameter("greeting");
+     <load-on-startup> -> Controls when the servlet is created. Lower number = higher priority. 1 loads before 2, etc.
+                          With this tag = servlet is created when the app starts.
+                          Without this tag = Servlet is created on first request.
+ -->
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.example.HelloServlet</servlet-class>
+    <init-param>
+      <param-name>greeting</param-name>
+      <param-value>Hello World</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+<!-- This is servlet mapping. With the help of servlet-mapping and servlet-name = URL->servlet-name->servlet-class   -->
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+<!-- <welcome-file-list> = Defines default files served when a dictinary is requested. Container tries (in order) to serve
+            index.html and index.jsp (First come, first serve). 
+      Why order matters -> Static page first for performance. JSP fallback if HTML doesn't exists -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+<!-- <error-page> = Maps errors/exceptions in custom pages. If the container encounters: HTTP status code 404. It forward to '/errors/404.htm'
+                    Benefits = Clean UX, Centralized error handling, No error HTML inside servlets.
+ -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errors/404.html</location>
+  </error-page>
+
+</web-app>
+

@@ -1,0 +1,7 @@
+The Wrapper Classes -> 
+  1) Primitive values in java are not objects. In order to manipulate those values as objects, the java.lang package
+  provides a wrapper classes for each of primitive datatypes.
+  2) All wrapper classes are final.
+  3) The objects of all wrapper classes that can be instantiated are immutable that is the value in the wrapper object can't 
+     be chaged.
+  4) 

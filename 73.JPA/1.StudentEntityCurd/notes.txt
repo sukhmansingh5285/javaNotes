@@ -1,0 +1,126 @@
+i created this file in my own capacity
+
+// for persistence.xml (Phase 1)
+
+1). first 2 lines, let's just say that they are important and will be used each time for now
+
+2). <persistent-unit name = "JPA" ...>
+    This defines a "configuration profile" named "JPA".
+    When you write Java code later, you will say 'createEntityManagerFactory("JPA")', and it will load these specific settings.
+
+3). <provider>
+    was facing issues with the code, since i am running the code using this, it works fine now
+
+4). <class> mypack.Student </class>
+    This registers your Java class so JPA knows about it.
+
+5). <properties>
+    bundling the property
+
+6). <property>
+    all the data name and it's values
+
+7). <persistence-unit name="JPA1">:
+    This is a second profile named "JPA1".
+    It connects to MySQL instead (com.mysql.jdbc.Driver).
+
+Takeaway: This file decouples your code from the database. If you want to switch from Oracle to MySQL, you don't change your Java code; 
+you just change the string "JPA" to "JPA1" when you start the app.
+
+
+
+// for Student.java (Plain Old Java Object (POJO)) [Phase 2]
+
+@Entity -> tells JPA, "This class isn't just code, it represents data in database.
+@Table -> This annotation connects the object with table named mentioned in it, if table isn't found in db, JPA will fail.
+implements Serializable -> it is a standard Java interface, it allows the object to be converted into a stream of bytes
+
+@Id -> primary key
+@GeneratedValue -> generates the ID for us automatically (like Auto Increment).
+@Column -> maps the private variable to column in the table.
+
+No-Arg Constructor -> Do not delete it. JPA uses "Reflection" to build object. When it reads from the database, it first creates an empty new Student(), and then uses
+                      the setter methods to fill in the data. If this empty constructor is missing, JPA will crash..
+
+Summary of Phase 2:
+You have built the "Blueprint."
+Java Class: Student
+Database Table: Student2
+The Link: @Entity, @Table, @Id
+
+// for StudentTest.java
+
+JPA relies on two main objects to do its job.
+1) EntityManagerFactory (The Factory): It's expensive to build. You build it once when the appliaction starts. It holds the "blueprints" (configuration).
+2) EntityManager (The Worker): It's cheap to create. You hire a new worker(create a new manager) every time you want to do a specific task (like "save this student")
+
+Steps in program:
+1) EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA");
+   ->What it does: It goes to your persistence.xml, looks for the persistence unit named "JPA", loads the drivers, and connects to the Oracle database.
+2) EntityManager manger = factory.createEntityManager();
+   ->This manger (Manager) is your primary interface. It provides the methods persist (save), find (read), remove (delete), etc.
+3) EntityTransaction t = manger.getTransaction();
+   t.begin();
+   ->The Rule- In JPA, data modification(Insert, Update, Delete) must happen inside a transaction.
+4) Student std1 = new Student(2022, "salman420", "khan", "salman420@gmail.com");
+   Student std2 = new Student(420, "aamir420", "khan", "aamir420@gmail.com");
+   -> Right now, these are just normal Java objects sitting in RAM. The database knows nothing about them. In JPA terms, they are in Transient state.
+5) manger.persist(std1);
+   manger.persist(std2);
+   -> This tell EntityManager: "Hey, watch these objects". The objects moves from Transient to Managed.
+   This usually doesn't generate the SQL INSERT immediately. It just queues them up in the "Persistence Context" (a temporary memory area).
+6) t.commit();
+   -> This is the point of no return. The EntityManager looks at all the "Managed" objects, sees they are new, and generates the SQL query, and send to db.
+7) manger.close(); 
+   factory.close();
+   -> Always close your resources. Leaving connections open can crash your database eventually.
+
+Summary of Phase 3
+
+You have learned how to:
+Boot up JPA (EntityManagerFactory).
+Start a transaction.
+Turn a Java object into a Database row (persist).
+Commit the changes.
+
+// Phase 4: Find(Read), setData(Update), Remove(Delete). 
+
+1) Reading data: 
+   System.out.println("Fetching record having");
+   Student std = manger.find(Student.class, new Long(420));
+   System.out.println(std.getFirstname());
+   -> you tell EntityManager, what type of object you want(Student.class) and which specific ID (420).
+
+2) Update Data:
+   Student std = manger.find(Student.class, new Long(420));
+   // ...
+   std.setFirstname("bala");  // 1. We change the Java object
+   manger.persist(std);       // 2. (Technically optional line)
+   t.commit();                // 3. The Database gets updated
+
+3) Delete data:
+   Student std = manger.find(Student.class, new Long(420));
+   // ...
+   manger.remove(std);
+   t.commit();
+
+
+
+
+
+// 4 additional properties were added in the 2 Folder:-
+
+<property name="eclipselink.logging.level" value="FINE"/>
+<property name ="eclipselink.ddl-generation" value="create-table"/>
+<property name="eclipselink.ddl-generation" value="create-or-extend-tables">
+<property name="eclipselink.ddl-generation" value="drop-and-create-tables" 
+
+1. It controls how much detail EclipseLink prints your console. INFO(default)-you only see general startup messages. FINE-EclipseLink will println
+   actual SQL queries it is sending to db. Other levels - SEVERE(errors only), WARNING, FINER, FINEST(extremely verbose).
+2. This property automates the creation of your database tables so you don't have to write CREATE TABLE SQL scripts manually. It looks at your Java
+   @Entity classes and builds the database to match them.
+3. create-or-extend-tables = "Safe" update. It checks if the table exists. 
+   If NO, it creates it.
+   If Yes, It checks if you added new fields (columns) in your Java class and adds them to the database.
+4. drop-and-create-tables = it explicitly runs DROP TABLE commands before running the CREATE TABLE.
+   

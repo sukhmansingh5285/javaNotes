@@ -1,0 +1,29 @@
+1. Runtime and process class
+2. cloning
+3. Assertion
+4. Java Compiler api
+5. ForEach
+6. variable length arguments 
+7. executable jar war ear
+8. switch case with string
+9. ten parts of bytecode 
+10. wrapper classes
+11. generics
+12. enum
+13. Annotation
+14. lambda expressions
+15. resouuce handling in exception
+16. Premain method
+17. Atomic variable
+18. Four types of references
+19. Callable
+20. Threadpool
+21. Volatile
+22. Random
+23. BigInteger
+24. regex
+25. CountDownLatches
+26. CyclicBinder
+27. Exchanger
+28. Phasers
+29. ConcurrentLinkedQueue

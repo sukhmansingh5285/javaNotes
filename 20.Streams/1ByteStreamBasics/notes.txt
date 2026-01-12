@@ -1,0 +1,2 @@
+3 ways to take data from keyboard -> DataInputStream connect to System.in, BufferedInputStream, and final is Scanner class connected 
+                                     to System.in

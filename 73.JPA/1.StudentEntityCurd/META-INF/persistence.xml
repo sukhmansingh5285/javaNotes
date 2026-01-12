@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+<persistence-unit name="JPA" transaction-type="RESOURCE_LOCAL">  
+<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<class>mypack.Student</class>
+<properties>
+  <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"  />
+  <property name="javax.persistence.jdbc.user" value="system"   />
+  <property name="javax.persistence.jdbc.password" value="hellyeah5285"  />
+  <property  name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"  />
+
+  <!-- <property name="openjpa.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver"/>
+  <property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+  <property name="openjpa.ConnectionUserName" value="system"/>
+  <property name="openjpa.ConnectionPassword" value="hellyeah5285"/> -->
+</properties>
+</persistence-unit>
+
+<persistence-unit name="JPA1" transaction-type="RESOURCE_LOCAL">
+<class>mypack.Student</class>
+<properties>
+  <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/jpa"  />
+  <property name="javax.persistence.jdbc.user" value="jpa"   />
+  <property name="javax.persistence.jdbc.password" value="jpa"  />
+  <property  name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"  />
+</properties>
+</persistence-unit>
+</persistence>
+
+<!-- You faced lot's of issues to run them. Provider Mismatch: Your path1.bat includes weblogic.jar. WebLogic 12c defaults to  -->
+<!-- EclipseLink, but it also contains OpenJPA/Kodo for legacy support. Your environment is accidentally initializing OpenJPA.  -->
+<!-- There are 2 ways -> adding provider tag like above to use EclipseLink, or to use JPA, other set of  -->
+<!-- property tag -->

@@ -1,0 +1,62 @@
+Important Points So Far:-
+
+Serialization -> Serialization is a process of converting an object into stream.
+Deserialization -> Deserialization is a process of converting the stream into object.
+
+Advantages of Serialization -> 1. To save the state of an object or to persist an object.
+                               2. To travel an object on network.
+
+Rules for Serialization -> 
+1).Only the objects of those classes can be serialized which are implementing Serializable interface.
+2).Serializable interface doesn't have any method that's why it is known as marker interface.
+3).If a parent class has implemented Serializable interface then child class does not need to implement it but vice versa is not true.
+4).Only the instance data members are saved via serialization process.
+5).Static data members and transient data members are not saved via serialization process.
+6).If you do not want to save the value of any instance data member via serialization process then make it transient.
+7).When we deserialize an object then the constructor of that class is never executed.
+8).The classes of associated objects must be implementing Serializable interface.
+State of an object -> The current values of data members of an object is known as state of an object.
+
+
+
+
+/////////**************************************************************************////////////////
+
+
+
+
+The serialization compiletime associates with each serialzable class a version number, called a serialVersionUID, which is used 
+during deserialization to verify that the sender and receiver of a serialzed object have loaded classes for that object that are
+compatible with respect to serialization. If the receiver has loaded a class for the object that has a different serialVersionUID 
+than that of the corresponding sender's class, then deserialization will result in an InvalidClassException. A serializable 
+class can declare its own serialVersionUID explicitly by declaring a field named "serialVersionUID" that must be static, final,
+and of type long.
+
+ANY-ACCESS-MODIFIER static final long serialVersionUID = 42L;
+
+If a serializable  class does not explicitly declare a serialVersionUID, then the serialization compiletime will calculate a 
+default serialVersionUID valued for that class based on various aspects of the class, as described in the Java Object Serialization
+Specification. However, it is strongly recommended that all serializable classes explicitly declare serialVersionUID values, since
+the default serialVersionUID computation is highly sensitive to class details that may very depending on compiler implementations,
+many details including fields in your class, there access modifier, the interface they implement and even different Compiler implementations,
+any change on class or using different compiler may result in different serialVersionUID, which many eventually stop reloading serialized
+data. It's too risky to rely on Java Serialization mechanism for generating this id, and that's why it's recommended to declare explicitly
+SerialVersionUID in your Serializable class and can thus result in unexpected InvalidClassExceptions during deserialization.
+
+You can use JDK's serialver tool to generate SerialVersionUID for classes.
+
+$ serialver -classpath . emp
+Emp: static final long SerialVersionUID = -4862926644813433707L;
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Now we know what is SerialVersionUID and why it's Important to declare it in Serializable class, it's time to revise some of the 
+important fact, related to Java SerialVersionUID.
+
+1) SerialVersionUID is used to version serialized data. You can only de-serialize a class if it's SerialVersionUID matches with the
+  serialized instance.
+2) When we don't declare SerialVersionUID in our class, Java compiletime generates it for us, but that process is sensitive to 
+  many class meta data including number of fields, type of fields, access modifier of fileds, interface implemented by class, etc.
+3) It's recommended to declare SerialVersionUID as private static final long variable to avoid default mechanism.
+4) You can even use serialver tool frok JDK to generate Serial Version for classes in Java.
+5) It's Serialization best practice in Java to explicitly declare SerialVersionUID, to avoid any issues during de-serialization
+  especially if you are running a client server application which relies on serialized data e.g. RMI.
